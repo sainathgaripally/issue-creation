@@ -7,16 +7,23 @@ token = {"name": "splunk-token-production"}
 grace_period = 45
 ttl = 365
 
-# Build issue content
 token_name = token.get("name")
+grace_period = 45
+ttl = 365
+
 issue_body = f"""\
-**Token Name**: {token_name}
-**Grace Period**: {grace_period}
-**TTL**: {ttl}
+token_name  
+{token_name}
+
+grace_period  
+{grace_period}
+
+token_expiry_length  
+{ttl}
 """
 
 issue_payload = {
-    "title": f"🔁 Rotate Splunk Token: {token_name}",
+    "title": f"splunk-observability token management",
     "body": issue_body
 }
 
