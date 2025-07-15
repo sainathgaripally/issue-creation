@@ -12,13 +12,13 @@ grace_period = 45
 ttl = 365
 
 issue_body = f"""\
-token_name  
+**token_name**  
 {token_name}
 
-grace_period  
+**grace_period**  
 {grace_period}
 
-token_expiry_length  
+**token_expiry_length**  
 {ttl}
 """
 
