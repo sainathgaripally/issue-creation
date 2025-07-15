@@ -7,7 +7,7 @@ jobs:
   create-and-close-issue:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub provides this automatically
+      GH_TOKEN: ${{ github.token }}  # GitHub provides this automatically
       GITHUB_REPOSITORY: ${{ github.repository }}
 
     steps:
