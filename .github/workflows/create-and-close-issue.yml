@@ -3,6 +3,10 @@ name: Test GH_TOKEN Issue Creator
 on:
   workflow_dispatch:  # Trigger manually from GitHub UI
 
+permissions:
+  issues: write
+  contents: read
+  
 jobs:
   create-and-close-issue:
     runs-on: ubuntu-latest
