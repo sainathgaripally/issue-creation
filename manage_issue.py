@@ -20,6 +20,7 @@ issue_body = f"""\
 
 **token_expiry_length**  
 {ttl}
+"""
 
 issue_payload = {
     "title": f"splunk-observability token management",
