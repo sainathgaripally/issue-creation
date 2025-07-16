@@ -13,12 +13,15 @@ ttl = 365
 
 issue_body = f"""\
 **token_name**  
+
 {token_name}
 
 **grace_period**  
+
 {grace_period}
 
 **token_expiry_length**  
+
 {ttl}
 """
 
