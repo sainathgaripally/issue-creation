@@ -1,6 +1,8 @@
 name: Trigger on Issue Close
 
 on:
+  repository_dispatch:
+    types: [issue-closed-automation]
   issues:
     types:
       - closed
