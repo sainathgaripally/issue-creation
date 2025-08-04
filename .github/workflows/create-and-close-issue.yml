@@ -11,7 +11,7 @@ jobs:
   create-and-close-issue:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ github.token }}  # GitHub provides this automatically
+      GH_TOKEN: ${{ secrets.PAT }}  # GitHub provides this automatically
       GITHUB_REPOSITORY: ${{ github.repository }}
 
     steps:
@@ -28,11 +28,3 @@ jobs:
 
       - name: Run script to create and close issue
         run: python manage_issue.py
-
-      - name: Trigger second workflow
-        if: success()   # ✅ Runs only if script exits with 0
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ env.GH_TOKEN }}
-          repository: ${{ env.GITHUB_REPOSITORY }}
-          event-type: issue-closed-automation
