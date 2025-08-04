@@ -1,0 +1,19 @@
+name: Trigger on Issue Close
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  on-issue-closed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print issue details
+        run: |
+          echo "Issue closed: ${{ github.event.issue.title }}"
+          echo "Closed by: ${{ github.event.issue.closed_by.login }}"
+          echo "Issue number: ${{ github.event.issue.number }}"
+
+      - name: Example follow-up action
+        run: echo "Running follow-up job because an issue was closed."
