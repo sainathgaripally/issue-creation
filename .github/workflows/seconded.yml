@@ -4,8 +4,8 @@ on:
   issues:
     types:
       - closed
-  # repository_dispatch:
-  #   types: [trigger-next-job]
+  repository_dispatch:
+    types: [trigger-next-job]
   
 
 jobs:
