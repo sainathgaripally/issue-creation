@@ -71,10 +71,8 @@ def trigger_next_workflow(event_type, payload):
     )
 
     if response.status_code != 204:
-        logger.error(f"❌ Failed to trigger next workflow: {response.text}")
         return False
 
-    logger.info("✅ Successfully triggered second workflow via repository_dispatch")
     return True
 
 # 3. Close issue
