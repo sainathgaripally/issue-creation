@@ -56,7 +56,7 @@ time.sleep(3)
 
 # 3. Close issue
 close_resp = requests.patch(
-    f"https://api.github.com/repos/{repo}/issues/{issue_number}",
+    f"https://api.github.com/repos/{repo}/issues/{issuessss_number}",
     headers=headers,
     json={"state": "closed"}
 )
