@@ -29,3 +29,6 @@ jobs:
 
       - name: Run script to create and close issue
         run: python manage_issue.py
+
+      - name: Test job
+        run: echo "Testing done"
