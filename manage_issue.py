@@ -69,6 +69,7 @@ def trigger_next_workflow(event_type, payload):
         },
         headers=headers
     )
+    response.raise_for_status()
 
     if response.status_code != 204:
         return False
