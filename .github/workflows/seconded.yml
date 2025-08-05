@@ -4,6 +4,9 @@ on:
   issues:
     types:
       - closed
+  repository_dispatch:
+    types: [trigger-next-job]
+  
 
 jobs:
   on-issue-closed:
