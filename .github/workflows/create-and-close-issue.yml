@@ -5,7 +5,7 @@ on:
 
 permissions:
   issues: write
-  contents: read
+  contents: write
   
 jobs:
   create-and-close-issue:
