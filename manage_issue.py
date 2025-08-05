@@ -93,21 +93,10 @@ else:
 
 issue_number = 23
 
-for _ in range(3):
-    url = f"https://api.github.com/repos/{repo}/actions/runs?event=issues"
-    headers = headers
-    response = requests.get(url, headers=headers).json()
-    
-    runs = [
-        run for run in response.get("workflow_runs", [])
-        if f"#{issue_number}" in run.get("display_title", "")
-    ]
-    
-    if runs and runs[0]["status"] == "completed":
-        print("✅ Workflow completed successfully")
-        break
-    
-    print("⏳ Waiting for workflow to finish...")
-    time.sleep(5)
-else:
-    print("❌ Workflow did not finish in expected time.")
+
+url = f"https://api.github.com/repos/{repo}/actions/runs?event=issues"
+headers = headers
+response = requests.get(url, headers=headers).json()
+print(response.get("workflow_runs", []))
+
+
