@@ -54,20 +54,6 @@ else:
 # 2. Optional: Pause before closing
 time.sleep(3)
 
-# 3. Close issue
-close_resp = requests.patch(
-    f"https://api.github.com/repos/{repo}/issues/{issue_number}",
-    headers=headers,
-    json={"state": "closed"}
-)
-
-if close_resp.status_code == 200:
-    print(f"Issue #{issue_number} closed.")
-    print(f"Trigger other workflow")
-    trigger_next_workflow("trigger-next-job", {"issue": issue_number})
-
-else:
-    print("❌ Failed to close issue:", close_resp.status_code, close_resp.text)
 
 def trigger_next_workflow(event_type, payload):
     headers = {
@@ -90,3 +76,18 @@ def trigger_next_workflow(event_type, payload):
 
     logger.info("✅ Successfully triggered second workflow via repository_dispatch")
     return True
+
+# 3. Close issue
+close_resp = requests.patch(
+    f"https://api.github.com/repos/{repo}/issues/{issue_number}",
+    headers=headers,
+    json={"state": "closed"}
+)
+
+if close_resp.status_code == 200:
+    print(f"Issue #{issue_number} closed.")
+    print(f"Trigger other workflow")
+    trigger_next_workflow("trigger-next-job", {"issue": issue_number})
+
+else:
+    print("❌ Failed to close issue:", close_resp.status_code, close_resp.text)
