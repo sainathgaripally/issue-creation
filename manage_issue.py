@@ -63,5 +63,30 @@ close_resp = requests.patch(
 
 if close_resp.status_code == 200:
     print(f"Issue #{issue_number} closed.")
+    print(f"Trigger other workflow")
+    trigger_next_workflow("trigger-next-job", {"issue": issue_number})
+
 else:
     print("❌ Failed to close issue:", close_resp.status_code, close_resp.text)
+
+def trigger_next_workflow(event_type, payload):
+    headers = {
+        "Authorization": f"token {gh_token}",
+        "Accept": "application/vnd.github+json"
+    }
+
+    response = requests.post(
+        f"https://api.github.com/repos/{repo}/dispatches",
+        json={
+            "event_type": event_type,
+            "client_payload": payload
+        },
+        headers=headers
+    )
+
+    if response.status_code != 204:
+        logger.error(f"❌ Failed to trigger next workflow: {response.text}")
+        return False
+
+    logger.info("✅ Successfully triggered second workflow via repository_dispatch")
+    return True
