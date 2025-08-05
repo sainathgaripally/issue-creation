@@ -91,17 +91,23 @@ if close_resp.status_code == 200:
 else:
     print("❌ Failed to close issue:", close_resp.status_code, close_resp.text)
 
-for i in {1..30}; do
-  STATUS=$(curl -s \
-    -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-    "https://api.github.com/repos/{repo}/actions/runs?event=issues" \
-    | jq -r '.workflow_runs[] | select(.run_number==23) | .status')
-  
-  if [ "$STATUS" == "completed" ]; then
-    echo "Workflow completed successfully."
-    break
-  fi
-  
-  echo "Waiting for token rotation workflow to finish..."
-  sleep 20
-done
+issue_number = 23
+
+for _ in range(30):
+    url = f"https://api.github.com/repos/{repo}/actions/runs?event=issues"
+    headers = headers
+    response = requests.get(url, headers=headers).json()
+    
+    runs = [
+        run for run in response.get("workflow_runs", [])
+        if f"#{issue_number}" in run.get("display_title", "")
+    ]
+    
+    if runs and runs[0]["status"] == "completed":
+        print("✅ Workflow completed successfully")
+        break
+    
+    print("⏳ Waiting for workflow to finish...")
+    time.sleep(20)
+else:
+    print("❌ Workflow did not finish in expected time.")
