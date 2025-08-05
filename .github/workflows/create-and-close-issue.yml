@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     env:
-      GH_TOKEN: ${{ secrets.PAT }}  # GitHub provides this automatically
+      GH_TOKEN: ${{ github.token }}  # GitHub provides this automatically
       GITHUB_REPOSITORY: ${{ github.repository }}
 
     steps:
